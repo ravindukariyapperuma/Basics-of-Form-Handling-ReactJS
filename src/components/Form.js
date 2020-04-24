@@ -32,29 +32,32 @@ class Form extends Component {
 
     handleSubmit = event => {
         alert(`${this.state.username} ${this.state.comments} ${this.state.topic}`)
+        event.stopImmediatePropagation()
+        // event.preventDefault()
     }
     
     render() {
+        const { username, comments, topic} = this.state
         return (
             <form onSubmit={this.handleSubmit}>
                 <div>
                     <label>Username</label>
                     <input
                      type="text" 
-                     value={this.state.username} 
+                     value={username} 
                      onChange={this.handleUsernameChange} 
                      />
                 </div>
                 <div>
                     <lable>Comments</lable>
                     <textarea 
-                    value={this.state.comments} 
+                    value={comments} 
                     onChange={this.handleCommentChange}></textarea>
                 </div>
                 <div>
                     <lable>Topic</lable>
                     <select 
-                    value={this.state.topic} 
+                    value={topic} 
                     onChange={this.handleTopicChange}>
                         <option value="react">React</option>
                         <option value="anguler">Anguler</option>
