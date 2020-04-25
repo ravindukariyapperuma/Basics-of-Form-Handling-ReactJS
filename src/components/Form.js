@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+const axios = require('axios');
 
 class Form extends Component {
 
@@ -31,9 +32,28 @@ class Form extends Component {
     }
 
     handleSubmit = event => {
-        alert(`${this.state.username} ${this.state.comments} ${this.state.topic}`)
-        event.stopImmediatePropagation()
-        // event.preventDefault()
+        // alert(`${this.state.username} ${this.state.comments} ${this.state.topic}`);
+        // event.stopImmediatePropagation();
+        event.preventDefault();
+        console.log(this.state.username);
+        this.sendData();
+    }
+
+    async sendData () {
+        const data ={
+            title: this.state.username,
+            description: this.state.comments
+        }
+        try{
+            const responce = await axios({
+                method: 'post',
+                url: 'http://localhost:4000/posts',
+                data: data,
+              });
+              console.log(responce);
+        }catch(ex){
+
+        }
     }
     
     render() {
